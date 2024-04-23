@@ -27,10 +27,14 @@ colnames(prot_rawdata)[1:4] <- c("Protein_Group","Accession","Description","GN")
 ################################################
 ## Uniprot ids mapped to ensembl ids
 ## RNA expression all samples
-rna_all <- read_excel("rawdata/Supplementary_Table_v2.xlsx",sheet = "Table S3", skip = 2)
+rna_all <- read_delim("rawdata/RNA_expression_PEER_PhenoIn.txt", 
+                       delim = "\t", escape_double = FALSE, trim_ws = TRUE)[c(4,7:422)]
 #
 names(rna_all)[1] <- "ensembl"
 #
+
+
+
 prot_nona2 <- as.data.frame(prot_rawdata[, c(which(grepl(pattern = "sig", x = colnames(prot_rawdata))))])
 #
 rownames(prot_nona2) <- prot_rawdata$Accession
